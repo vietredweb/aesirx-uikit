@@ -31,7 +31,7 @@ const ListMember = observer((props: any) => {
                 <div className="text-green">
                   <button
                     onClick={() => {
-                      history.push(`/members/edit/${value.id}`);
+                      history.push(`/pim/members/edit/${value.id}`);
                     }}
                     className="p-0 border-0 bg-transparent d-inline-block text-green"
                   >
@@ -205,7 +205,7 @@ const ListMember = observer((props: any) => {
               icon: '/assets/images/plus.svg',
               variant: 'success',
               handle: async () => {
-                history.push('/members/add');
+                history.push('/pim/members/add');
               },
             },
           ]}

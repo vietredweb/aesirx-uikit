@@ -30,7 +30,21 @@ const EditMember = observer(
     constructor(props: any) {
       super(props);
       this.state = {};
-      this.validator = new SimpleReactValidator({ autoForceUpdate: this });
+      this.validator = new SimpleReactValidator({
+        autoForceUpdate: this,
+        validators: {
+          memberName: {
+            // name the rule
+            message:
+              'Member name must be with alphanumeric (a-z, 0-9) characters (plus underscore _) and be between 3 to 20 characters in length',
+            rule: (val: any, params?: any, validator?: any) => {
+              return (
+                validator.helpers.testRegex(val, /^[a-z0-9_]{3,20}$/i) && params.indexOf(val) === -1
+              );
+            },
+          },
+        },
+      });
       this.memberDetailViewModel = props.model?.memberDetailViewModel
         ? props.model?.memberDetailViewModel
         : null;
@@ -79,7 +93,7 @@ const EditMember = observer(
               props={this.props}
               title={t('txt_member')}
               isEdit={this.isEdit}
-              redirectUrl={'/members'}
+              redirectUrl={'/pim/members'}
             />
             <div className="position-relative">
               <ActionsBar
@@ -87,7 +101,7 @@ const EditMember = observer(
                   {
                     title: t('txt_cancel'),
                     handle: async () => {
-                      history.push(`/members`);
+                      history.push(`/pim/members`);
                     },
                     icon: '/assets/images/cancel.svg',
                   },
@@ -99,7 +113,7 @@ const EditMember = observer(
                           ? await this.memberDetailViewModel.update()
                           : await this.memberDetailViewModel.create();
                         if (!result?.error) {
-                          history.push(`/members`);
+                          history.push(`/pim/members`);
                         }
                       } else {
                         this.handleValidateForm();
@@ -118,7 +132,7 @@ const EditMember = observer(
                         } else {
                           const result = await this.memberDetailViewModel.create();
                           if (!result?.error) {
-                            history.push(`/members/edit/${result?.response}`);
+                            history.push(`/pim/members/edit/${result?.response}`);
                           }
                         }
                       } else {
@@ -162,7 +176,7 @@ const EditMember = observer(
                     this.memberDetailViewModel.memberDetailViewModel.formPropsData[
                       ORGANISATION_MEMBER_FIELD.MEMBER_NAME
                     ],
-                    'required',
+                    'required|memberName',
                     {
                       className: 'text-danger mt-8px',
                     }

@@ -78,7 +78,7 @@ const EditRole = observer(
               props={this.props}
               title={t('txt_role')}
               isEdit={this.isEdit}
-              redirectUrl={'/roles'}
+              redirectUrl={'/pim/roles'}
             />
             <div className="position-relative">
               <ActionsBar
@@ -86,7 +86,7 @@ const EditRole = observer(
                   {
                     title: t('txt_cancel'),
                     handle: async () => {
-                      history.push(`/roles`);
+                      history.push(`/pim/roles`);
                     },
                     icon: '/assets/images/cancel.svg',
                   },
@@ -98,7 +98,7 @@ const EditRole = observer(
                           ? await this.roleDetailViewModel.update()
                           : await this.roleDetailViewModel.create();
                         if (!result?.error) {
-                          history.push(`/roles`);
+                          history.push(`/pim/roles`);
                         }
                       } else {
                         this.handleValidateForm();
@@ -117,7 +117,7 @@ const EditRole = observer(
                         } else {
                           const result = await this.roleDetailViewModel.create();
                           if (!result?.error) {
-                            history.push(`/roles/edit/${result?.response}`);
+                            history.push(`/pim/roles/edit/${result?.response}`);
                           }
                         }
                       } else {

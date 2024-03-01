@@ -160,7 +160,7 @@ const ListMemberRole = observer((props: any) => {
               icon: '/assets/images/plus.svg',
               variant: 'success',
               handle: async () => {
-                history.push('/member-role/add');
+                history.push('/pim/member-role/add');
               },
             },
           ]}

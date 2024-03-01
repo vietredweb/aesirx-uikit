@@ -31,7 +31,7 @@ const ListRole = observer((props: any) => {
                 <div className="text-green">
                   <button
                     onClick={() => {
-                      history.push(`/roles/edit/${value.id}`);
+                      history.push(`/pim/roles/edit/${value.id}`);
                     }}
                     className="p-0 border-0 bg-transparent d-inline-block text-green"
                   >
@@ -104,7 +104,7 @@ const ListRole = observer((props: any) => {
               icon: '/assets/images/plus.svg',
               variant: 'success',
               handle: async () => {
-                history.push('/roles/add');
+                history.push('/pim/roles/add');
               },
             },
           ]}
